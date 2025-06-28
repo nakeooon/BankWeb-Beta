@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BankFlow - Tu Banco Moderno</title>
+    <!-- Enlace al archivo CSS principal -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Importar la fuente Inter de Google Fonts para un aspecto limpio -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Importar Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Barra lateral de navegación -->
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-wallet"></i> <!-- Icono de cartera/billetera -->
+            <span>BankFlow</span>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <!-- data-target apunta al ID de la sección de contenido correspondiente -->
+                <li class="active"><a href="#" data-target="dashboard-content"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#" data-target="cards-content"><i class="fas fa-credit-card"></i> Mis Tarjetas</a></li>
+                <li><a href="#" data-target="transactions-content"><i class="fas fa-exchange-alt"></i> Transacciones</a></li>
+                <li><a href="#" data-target="statistics-content"><i class="fas fa-chart-line"></i> Estadísticas</a></li>
+                <li><a href="#" data-target="settings-content"><i class="fas fa-cog"></i> Ajustes</a></li>
+            </ul>
+        </nav>
+        <!-- Sección del perfil de usuario en la barra lateral -->
+        <div class="user-profile">
+            <!-- Avatar de placeholder con texto -->
+            <img src="https://placehold.co/40x40/007AFF/FFFFFF?text=JP" alt="User Avatar">
+            <div class="user-info">
+                <span>Juan Pérez</span>
+                <small>Premium Member</small>
+            </div>
+            <i class="fas fa-sign-out-alt logout-icon"></i> <!-- Icono para cerrar sesión -->
+        </div>
+    </div>
+
+    <!-- Contenido principal de la página -->
+    <div class="main-content">
+        <!-- Cabecera del contenido principal (permanece estática en todas las vistas) -->
+        <header class="header">
+            <div class="header-left">
+                <h2>Hola, Juan.</h2>
+                <p>Bienvenido de nuevo a tu panel de control.</p>
+            </div>
+            <div class="header-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar transacciones...">
+                    <i class="fas fa-search"></i> <!-- Icono de búsqueda -->
+                </div>
+                <button class="notification-btn"><i class="fas fa-bell"></i></button> <!-- Botón de notificaciones -->
+            </div>
+        </header>
+
+        <!-- Secciones de contenido: solo una será visible a la vez -->
+
+        <!-- Sección del Dashboard (vista inicial) -->
+        <div id="dashboard-content" class="content-section active-content">
+            <!-- Sección de tarjetas de resumen (overview) -->
+            <section class="overview-cards">
+                <div class="card balance-card">
+                    <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="card-content">
+                        <small>Balance Total</small>
+                        <h3>$12,450.<span class="cents">75</span></h3>
+                    </div>
+                </div>
+                <div class="card income-card">
+                    <div class="card-icon"><i class="fas fa-arrow-alt-circle-up"></i></div>
+                    <div class="card-content">
+                        <small>Ingresos (Mes)</small>
+                        <h4>$3,200.<span class="cents">00</span></h4>
+                    </div>
+                </div>
+                <div class="card expense-card">
+                    <div class="card-icon"><i class="fas fa-arrow-alt-circle-down"></i></div>
+                    <div class="card-content">
+                        <small>Gastos (Mes)</small>
+                        <h4>$1,100.<span class="cents">20</span></h4>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección principal con dos paneles: izquierdo y derecho -->
+            <section class="main-section">
+                <div class="left-panel">
+                    <!-- Sección "Mis Tarjetas" (mini-vista en dashboard) -->
+                    <div class="my-cards card">
+                        <h3>Mis Tarjetas</h3>
+                        <div class="cards-container">
+                            <!-- Las tarjetas ahora tienen data-card-type para pasar el tipo al modal de detalles -->
+                            <div class="credit-card visa active-card" data-card-type="Visa">
+                                <div class="card-header">
+                                    <span>VISA</span>
+                                    <i class="fab fa-cc-visa"></i> <!-- Icono de Visa -->
+                                </div>
+                                <div class="card-body">
+                                    <span class="card-number">**** **** **** 1234</span>
+                                    <div class="card-details">
+                                        <small>Saldo</small>
+                                        <span class="card-balance">$5,890.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="credit-card mastercard" data-card-type="Mastercard">
+                                <div class="card-header">
+                                    <span>MASTERCARD</span>
+                                    <i class="fab fa-cc-mastercard"></i> <!-- Icono de Mastercard -->
+                                </div>
+                                <div class="card-body">
+                                    <span class="card-number">**** **** **** 5678</span>
+                                    <div class="card-details">
+                                        <small>Saldo</small>
+                                        <span class="card-balance">$3,120.50</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="add-card-btn" data-modal-type="add-card"><i class="fas fa-plus"></i> Añadir Tarjeta</button>
+                        </div>
+                    </div>
+
+                    <!-- Sección de "Transacciones Recientes" (mini-vista en dashboard) -->
+                    <div class="recent-transactions card">
+                        <h3>Transacciones Recientes</h3>
+                        <ul>
+                            <li>
+                                <div class="transaction-icon income"><i class="fas fa-arrow-down"></i></div>
+                                <div class="transaction-info">
+                                    <span>Pago de Salario</span>
+                                    <small>15 Jun 2025</small>
+                                </div>
+                                <span class="transaction-amount income-amount">+$2,500.00</span>
+                            </li>
+                            <li>
+                                <div class="transaction-icon expense"><i class="fas fa-arrow-up"></i></div>
+                                <div class="transaction-info">
+                                    <span>Compra en Tienda Online</span>
+                                    <small>14 Jun 2025</small>
+                                </div>
+                                <span class="transaction-amount expense-amount">-$120.50</span>
+                            </li>
+                            <li>
+                                <div class="transaction-icon expense"><i class="fas fa-arrow-up"></i></div>
+                                <div class="transaction-info">
+                                    <span>Cafetería</span>
+                                    <small>14 Jun 2025</small>
+                                </div>
+                                <span class="transaction-amount expense-amount">-$15.00</span>
+                            </li>
+                        </ul>
+                        <!-- Botón para ir a la sección completa de transacciones -->
+                        <a href="#" class="view-all-transactions" data-target="transactions-content">Ver todas las transacciones <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Panel derecho del dashboard -->
+                <div class="right-panel">
+                    <!-- Sección "Metas de Ahorro" -->
+                    <div class="goals-savings card">
+                        <h3>Metas de Ahorro</h3>
+                        <div class="goal-item">
+                            <div class="goal-header">
+                                <span>Vacaciones en Costa Rica</span>
+                                <small>$3,000 / $5,000</small>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 60%;"></div>
+                            </div>
+                            <p class="goal-description">Ahorrando para un viaje increíble.</p>
+                        </div>
+                        <div class="goal-item">
+                            <div class="goal-header">
+                                <span>Nuevo Portátil</span>
+                                <small>$800 / $1,200</small>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 66%;"></div>
+                            </div>
+                            <p class="goal-description">Para mis proyectos de desarrollo.</p>
+                        </div>
+                        <button class="add-goal-btn" data-modal-type="add-goal"><i class="fas fa-plus"></i> Añadir Meta</button>
+                    </div>
+
+                    <!-- Sección "Acciones Rápidas" -->
+                    <div class="quick-actions card">
+                        <h3>Acciones Rápidas</h3>
+                        <div class="action-grid">
+                            <button><i class="fas fa-paper-plane"></i> Transferir</button>
+                            <button><i class="fas fa-file-invoice-dollar"></i> Pagar Factura</button>
+                            <button><i class="fas fa-piggy-bank"></i> Ahorrar</button>
+                            <button><i class="fas fa-headset"></i> Soporte</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sección "Mis Tarjetas" completa -->
+        <div id="cards-content" class="content-section">
+            <h2>Mis Tarjetas</h2>
+            <p class="section-description">Aquí puedes gestionar todas tus tarjetas de crédito y débito.</p>
+            <div class="my-cards card full-width-card">
+                <h3>Tarjetas Activas</h3>
+                <div class="cards-container grid-layout">
+                    <div class="credit-card visa active-card" data-card-type="Visa">
+                        <div class="card-header">
+                            <span>VISA</span>
+                            <i class="fab fa-cc-visa"></i>
+                        </div>
+                        <div class="card-body">
+                            <span class="card-number">**** **** **** 1234</span>
+                            <div class="card-details">
+                                <small>Saldo</small>
+                                <span class="card-balance">$5,890.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="credit-card mastercard" data-card-type="Mastercard">
+                        <div class="card-header">
+                            <span>MASTERCARD</span>
+                            <i class="fab fa-cc-mastercard"></i>
+                        </div>
+                        <div class="card-body">
+                            <span class="card-number">**** **** **** 5678</span>
+                            <div class="card-details">
+                                <small>Saldo</small>
+                                <span class="card-balance">$3,120.50</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="credit-card amex" data-card-type="Amex">
+                        <div class="card-header">
+                            <span>AMERICAN EXPRESS</span>
+                            <i class="fab fa-cc-amex"></i>
+                        </div>
+                        <div class="card-body">
+                            <span class="card-number">**** **** **** 9012</span>
+                            <div class="card-details">
+                                <small>Saldo</small>
+                                <span class="card-balance">$7,500.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-card-btn" data-modal-type="add-card-full"><i class="fas fa-plus"></i> Añadir Nueva Tarjeta</button>
+            </div>
+
+            <div class="card-actions card full-width-card">
+                <h3>Acciones de Tarjetas</h3>
+                <div class="action-grid card-action-grid">
+                    <button><i class="fas fa-lock"></i> Bloquear Tarjeta</button>
+                    <button><i class="fas fa-key"></i> Cambiar PIN</button>
+                    <button><i class="fas fa-history"></i> Historial de Uso</button>
+                    <button><i class="fas fa-file-pdf"></i> Extracto Mensual</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección "Transacciones" completa -->
+        <div id="transactions-content" class="content-section">
+            <h2>Transacciones</h2>
+            <p class="section-description">Aquí tienes un registro detallado de todas tus operaciones.</p>
+            <div class="recent-transactions card full-width-card">
+                <h3>Historial Completo</h3>
+                <div class="transaction-filter">
+                    <input type="date" value="2025-06-01">
+                    <span>a</span>
+                    <input type="date" value="2025-06-15">
+                    <select>
+                        <option>Todas</option>
+                        <option>Ingresos</option>
+                        <option>Gastos</option>
+                        <option>Transferencias</option>
+                    </select>
+                    <button class="filter-btn"><i class="fas fa-filter"></i> Filtrar</button>
+                </div>
+                <ul>
+                    <li>
+                        <div class="transaction-icon income"><i class="fas fa-arrow-down"></i></div>
+                        <div class="transaction-info">
+                            <span>Pago de Salario</span>
+                            <small>15 Jun 2025</small>
+                        </div>
+                        <span class="transaction-amount income-amount">+$2,500.00</span>
+                    </li>
+                    <li>
+                        <div class="transaction-icon expense"><i class="fas fa-arrow-up"></i></div>
+                        <div class="transaction-info">
+                            <span>Compra en Tienda Online</span>
+                            <small>14 Jun 2025</small>
+                        </div>
+                        <span class="transaction-amount expense-amount">-$120.50</span>
+                    </li>
+                    <li>
+                        <div class="transaction-icon expense"><i class="fas fa-arrow-up"></i></div>
+                        <div class="transaction-info">
+                            <span>Cafetería</span>
+                            <small>14 Jun 2025</small>
+                        </div>
+                        <span class="transaction-amount expense-amount">-$15.00</span>
+                    </li>
+                    <li>
+                        <div class="transaction-icon income"><i class="fas fa-arrow-down"></i></div>
+                        <div class="transaction-info">
+                            <span>Reembolso</span>
+                            <small>13 Jun 2025</small>
+                        </div>
+                        <span class="transaction-amount income-amount">+$50.00</span>
+                    </li>
+                    <li>
+                        <div class="transaction-icon expense"><i class="fas fa-arrow-up"></i></div>
+                        <div class="transaction-info">
+                            <span>Suscripción Streaming</span>
+                            <small>12 Jun 2025</small>
+                        </div>
+                        <span class="transaction-amount expense-amount">-$9.99</span>
+                    </li>
+                    <li>
+                        <div class="transaction-icon transfer"><i class="fas fa-exchange-alt"></i></div>
+                        <div class="transaction-info">
+                            <span>Transferencia a Amigo</span>
+                            <small>11 Jun 2025</small>
+                        </div>
+                        <span class="transaction-amount transfer-amount">-$200.00</span>
+                    </li>
+                    <li>
+                        <div class="transaction-icon expense"><i class="fas fa-arrow-up"></i></div>
+                        <div class="transaction-info">
+                            <span>Supermercado</span>
+                            <small>10 Jun 2025</small>
+                        </div>
+                        <span class="transaction-amount expense-amount">-$85.70</span>
+                    </li>
+                    <li>
+                        <div class="transaction-icon income"><i class="fas fa-arrow-down"></i></div>
+                        <div class="transaction-info">
+                            <span>Venta Online</span>
+                            <small>09 Jun 2025</small>
+                        </div>
+                        <span class="transaction-amount income-amount">+$75.00</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sección "Estadísticas" completa -->
+        <div id="statistics-content" class="content-section">
+            <h2>Estadísticas</h2>
+            <p class="section-description">Análisis de tus gastos e ingresos.</p>
+            <div class="chart-container card full-width-card">
+                <h3>Resumen de Gastos Mensuales</h3>
+                <div class="bar-chart-wrapper">
+                    <!-- Las barras se generarán aquí con JS -->
+                    <div class="bar-chart" id="monthly-expenses-chart"></div>
+                    <div class="chart-labels x-axis-labels">
+                        <span>Ene</span><span>Feb</span><span>Mar</span><span>Abr</span><span>May</span><span>Jun</span>
+                    </div>
+                </div>
+                 <p class="chart-description">Gráfico de barras mostrando tus gastos por los últimos 6 meses (valores aleatorios).</p>
+            </div>
+            <div class="chart-container card full-width-card">
+                <h3>Flujo de Dinero (Últimos 6 meses)</h3>
+                <div class="line-chart-wrapper">
+                     <canvas id="money-flow-chart" width="600" height="250"></canvas>
+                     <div class="chart-labels x-axis-labels">
+                        <span>Ene</span><span>Feb</span><span>Mar</span><span>Abr</span><span>May</span><span>Jun</span>
+                    </div>
+                </div>
+                <p class="chart-description">Gráfico de líneas comparando ingresos y gastos a lo largo del tiempo (valores aleatorios).</p>
+            </div>
+        </div>
+
+        <!-- Sección "Ajustes" completa -->
+        <div id="settings-content" class="content-section">
+            <h2>Ajustes</h2>
+            <p class="section-description">Personaliza tu experiencia y gestiona tu cuenta.</p>
+            <div class="settings-options card full-width-card">
+                <h3>Ajustes de Cuenta</h3>
+                <ul>
+                    <li>
+                        <span><i class="fas fa-user-circle"></i> Información Personal</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li>
+                        <span><i class="fas fa-shield-alt"></i> Seguridad y Privacidad</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li>
+                        <span><i class="fas fa-bell"></i> Preferencias de Notificaciones</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li>
+                        <span><i class="fas fa-palette"></i> Tema y Apariencia</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li>
+                        <span><i class="fas fa-file-alt"></i> Términos y Condiciones</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="settings-options card full-width-card">
+                <h3>Soporte</h3>
+                <ul>
+                    <li>
+                        <span><i class="fas fa-question-circle"></i> Preguntas Frecuentes</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li>
+                        <span><i class="fas fa-life-ring"></i> Contactar Soporte</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para añadir tarjeta/meta (el modal general) -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modal-title"></h3>
+            <div id="modal-body">
+                <!-- El contenido del formulario se inyectará aquí mediante JavaScript -->
+            </div>
+            <button id="modal-confirm-btn" class="modal-main-btn"><i class="fas fa-check"></i> Confirmar</button>
+        </div>
+    </div>
+
+    <!-- Nuevo Modal Central para Detalles de Tarjeta -->
+    <div id="card-info-modal" class="modal">
+        <div class="modal-content card-info-modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="card-info-modal-title">Detalles de Tarjeta</h3>
+            <div id="card-info-modal-body">
+                <!-- Formulario de PIN -->
+                <div id="pin-entry-form">
+                    <p>Introduce tu PIN para ver los detalles completos de la tarjeta:</p>
+                    <div class="pin-input-container">
+                        <!-- Cuatro inputs para el PIN -->
+                        <input type="text" id="pinInput1" class="pin-digit-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                        <input type="text" id="pinInput2" class="pin-digit-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                        <input type="text" id="pinInput3" class="pin-digit-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                        <input type="text" id="pinInput4" class="pin-digit-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    </div>
+                    <div id="pin-error-message" class="error-message"></div>
+                    <button id="verifyPinBtn" class="modal-main-btn">Verificar PIN</button>
+                </div>
+
+                <!-- Contenedor de los detalles de la tarjeta (se muestra después de PIN correcto) -->
+                <div id="card-details-display">
+                    <!-- Los detalles se mostrarán dentro de esta tarjeta visual -->
+                    <div class="virtual-card">
+                        <div class="virtual-card-header">
+                            <span id="virtualCardType"></span>
+                            <i id="virtualCardLogo" class="fab"></i>
+                        </div>
+                        <div class="virtual-card-chip"></div>
+                        <div class="virtual-card-body">
+                            <span class="virtual-card-number" id="detail-card-number"></span>
+                            <div class="virtual-card-details">
+                                <div class="detail-group">
+                                    <small>TITULAR</small>
+                                    <span id="detail-card-holder"></span>
+                                </div>
+                                <div class="detail-group">
+                                    <small>VALID THRU</small>
+                                    <span id="detail-expiry"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="virtual-card-footer">
+                            <div class="detail-item">
+                                <strong>CVV:</strong> <span id="detail-cvv"></span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>PIN (Tarjeta):</strong> <span id="detail-card-pin"></span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>IBAN:</strong> <span id="detail-iban"></span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Estado:</strong> <span id="detail-status"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="disclaimer" style="margin-top: 20px;"><em>(Estos datos son generados aleatoriamente para esta demostración.)</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Enlace al archivo JavaScript principal -->
+    <script src="script.js"></script>
+</body>
+</html>
